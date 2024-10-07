@@ -16,11 +16,11 @@ const Hero = () => {
         </h1>
         <p className="font-header7">
           Currently, I am an 
-          <span className="text-pink"> 11th grader  </span>
+          <span className="text-pink"> 12th grader  </span>
           pursuing Software. I have 
-          <span className="text-orange"> 3+ years </span>
+          <span className="text-orange"> 4+ years </span>
           of coding experiences and I've made 
-          <span className="text-cyan"> 16+ projects. </span>
+          <span className="text-cyan"> 28+ projects. </span>
         </p>
       </div>
 

@@ -144,13 +144,13 @@ export default function Home() {
       </ParallaxLayer>
 
       <ParallaxLayer sticky={{start: 3, end: 4.9}}>
-        <Stats number="14" stat="hackatons" rowStart={2} colStart={10}/>
+        <Stats number="18" stat="hackatons" rowStart={2} colStart={10}/>
       </ParallaxLayer>
       <ParallaxLayer sticky={{start: 3.5, end: 4.9}}>
         <Stats number="33" stat="skills" rowStart={3} colStart={1}/>
       </ParallaxLayer>
       <ParallaxLayer sticky={{start: 4, end: 4.9}}>
-        <Stats number="18" stat="projects" rowStart={4} colStart={9}/>
+        <Stats number="28" stat="projects" rowStart={4} colStart={9}/>
       </ParallaxLayer>
 
       <ParallaxLayer offset={6} speed={0.9}>
