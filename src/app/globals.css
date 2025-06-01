@@ -19,8 +19,26 @@
   }
 }
 
+html, body {
+  overflow-y: scroll;           /* allow scrolling */
+  -ms-overflow-style: none;     /* IE and Edge */
+  scrollbar-width: none;        /* Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;                /* Chrome, Safari, Opera */
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.outlined-text {
+  color: transparent;
+  -webkit-text-stroke: 1px #fff;
+  text-stroke: 1px #fff;
+}
+
