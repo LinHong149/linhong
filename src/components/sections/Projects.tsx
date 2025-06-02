@@ -72,12 +72,11 @@ export default function ProjectsSection() {
                 {/* Description box */}
                 <Box
                   sx={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                    backgroundColor: '#463967',
                     padding: '1.5rem',
                     borderRadius: '8px',
                     marginTop: '1rem',
                     marginBottom: '0.5rem',
-                    backdropFilter: 'blur(4px)',
                     maxWidth: '100%',
                   }}
                   className={`shadow-xl -mt-12 ${isEven ? 'lg:-ml-16' : 'lg:-mr-16'}`}

@@ -9,7 +9,6 @@ const Main = () => {
 
   return (
     <div className="flex flex-col items-center justify-center w-[100vw] h-[100vh] pt-[10%] pb-[5%] px-parent">
-    {/* <AnimatedBackground/> */}
       <div className="flex flex-col gap-6 items-center z-10">
         <h1 className="text-8xl font-black leading-tight text-center">
           <span className="text-[#DCDEFF] font-black">Hi, I'm </span>
@@ -28,6 +27,7 @@ const Main = () => {
             textTransform: 'none',
             color: theme.palette.common.white,
             borderColor: theme.palette.common.white,
+            fontSize: '.9rem',
             '&:hover': {
               backgroundColor: 'rgba(255,255,255,0.08)',
               borderColor: theme.palette.common.white,

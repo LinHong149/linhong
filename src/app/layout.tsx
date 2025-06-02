@@ -1,11 +1,13 @@
 // app/layout.tsx
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Varela_Round } from "next/font/google";
 import "./globals.css";
 import ThemeRegistry from "@/components/ThemeRegistry"; // create this next
-const inter = Inter({
+
+const varelaRound = Varela_Round({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["400"],
+  variable: "--font-varela-round",
 });
 
 export const metadata: Metadata = {
@@ -19,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased min-h-screen`}>
+      <body className={`${varelaRound.variable} font-sans antialiased min-h-screen`}>
         
         <ThemeRegistry>{children}</ThemeRegistry>
       </body>

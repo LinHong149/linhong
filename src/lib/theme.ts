@@ -22,7 +22,37 @@ const theme = createTheme({
         black: '#09100F',
     }
   },
-  // You can add other theme customizations here like typography, spacing, components, etc.
+  typography: {
+    fontFamily: 'var(--font-varela-round)',
+    h1: {
+      fontFamily: 'var(--font-varela-round)',
+    },
+    h2: {
+      fontFamily: 'var(--font-varela-round)',
+    },
+    h3: {
+      fontFamily: 'var(--font-varela-round)',
+    },
+    h4: {
+      fontFamily: 'var(--font-varela-round)',
+    },
+    h5: {
+      fontFamily: 'var(--font-varela-round)',
+    },
+    h6: {
+      fontFamily: 'var(--font-varela-round)',
+    },
+    body1: {
+      fontFamily: 'var(--font-varela-round)',
+    },
+    body2: {
+      fontFamily: 'var(--font-varela-round)',
+    },
+    button: {
+      fontFamily: 'var(--font-varela-round)',
+    },
+  },
+  // You can add other theme customizations here like spacing, components, etc.
 });
 
 export default theme;
