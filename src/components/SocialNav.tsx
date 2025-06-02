@@ -13,22 +13,21 @@ import {
 
 const socialLinks = [
   {
-    href: 'https://github.com/yourusername',
+    href: 'https://mail.google.com/mail/?view=cm&fs=1&to=linlin.hong1@gmail.com',
+    icon: <EnvelopeIcon className="w-6 h-6" />,
+    label: 'Email',
+  },
+  {
+    href: 'https://github.com/LinHong149',
     icon: <FiGithub className="w-6 h-6" />,
     label: 'GitHub',
   },
   {
-    href: 'https://instagram.com/yourhandle',
-    icon: <FiInstagram className="w-6 h-6" />,
-    label: 'Instagram',
-  },
-  {
-    href: 'https://linkedin.com/in/yourusername',
+    href: 'https://www.linkedin.com/in/lin-hong-4b603a260/',
     icon: <FiLinkedin className="w-6 h-6" />,
     label: 'LinkedIn',
   },
 ];
-
 const SocialNav = () => {
   return (
     <div className="fixed z-10 bottom-0 left-6 hidden lg:flex flex-col items-center gap-6 text-[#72C6B2]" >

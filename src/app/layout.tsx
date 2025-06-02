@@ -1,13 +1,13 @@
 // app/layout.tsx
 import type { Metadata } from "next";
-import { Varela_Round } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import ThemeRegistry from "@/components/ThemeRegistry"; // create this next
 
-const varelaRound = Varela_Round({
+const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-varela-round",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {
@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${varelaRound.variable} font-sans antialiased min-h-screen`}>
+      <body className={`${poppins.variable} font-sans antialiased min-h-screen`}>
         
         <ThemeRegistry>{children}</ThemeRegistry>
       </body>

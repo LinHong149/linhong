@@ -31,7 +31,7 @@ body::-webkit-scrollbar {
 body {
   background-color: #09100F;
   color: var(--foreground);
-  font-family: var(--font-varela-round), sans-serif;
+  font-family: var(--font-poppins), sans-serif;
 }
 
 canvas {

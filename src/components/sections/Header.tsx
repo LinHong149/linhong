@@ -16,7 +16,7 @@ const Main = () => {
             className="bg-gradient-to-r from-[#72C6B2] to-[#AC71C0] bg-clip-text text-transparent font-black"
           >Lin Hong</span>
           <br />
-          <span className="outlined-text font-black">Software Engineer</span>
+          <span className="outlined-text font-black">A Software Engineer</span>
         </h1>
 
         <p className="text-xl text-center font-medium">Waterloo CS '30</p>

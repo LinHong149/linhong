@@ -7,22 +7,35 @@ import { HiMiniChevronRight } from 'react-icons/hi2';
 
 const companies = [
   {
-    name: 'Algoace',
-    role: 'Full Stack Developer @ Algoace',
-    date: 'Onsite | November 2022 - Present',
-    description: `During my tenure at Algoace, a prominent software company, I have held the position of a Full Stack Hybrid Mobile Application Developer. In this role, I have adeptly utilized technologies such as React Native, AWS Microservices, and Firebase to contribute to the development and enhancement of cutting-edge mobile applications.`,
+    name: 'FIRST Robotics',
+    role: 'Lead Software Engineer @ Robeartics 19500',
+    date: 'Onsite | September 2022 – Present',
+    description: [
+      'Led mechanical and software development for competition robots using Java and FTC SDK.',
+      'Designed AI-based autonomous navigation using TensorFlow and AprilTag detection.',
+      'Trained and managed a 15-member team; led them to the 2025 World Championships in Houston, TX.',
+      'Organized outreach workshops to teach programming and engineering to over 600 students.',
+    ],
   },
   {
-    name: 'Upwork & Fiver',
-    role: 'Freelancer @ Upwork & Fiver',
-    date: 'Remote | 2021 - 2022',
-    description: 'Provided freelance development services using React Native and Firebase.',
+    name: 'Linovation Design',
+    role: 'Founder & Full Stack Developer',
+    date: 'Onsite | June 2024 – August 2024',
+    description: [
+      'Founded a freelance design agency offering custom websites and ERP tools to local businesses.',
+      'Generated $2.3K profit in 2 months; improved a client’s operational efficiency by 10%.',
+      'Pitched to businesses in person, online, and at trade fairs — overcoming personal introversion.',
+    ],
   },
   {
-    name: 'Softstings',
-    role: 'Intern @ Softstings',
-    date: 'Hybrid | 2020 - 2021',
-    description: 'Assisted in front-end feature development and testing on hybrid apps.',
+    name: 'Hackathon Circuit',
+    role: 'Organizer, Volunteer, and Participant',
+    date: 'Remote & Onsite | September 2020 – Present',
+    description: [
+      'Attended 20+ hackathons and won 10+ awards including Best Use of Terraform at Hack the North 2024.',
+      'Organized GeeseHacks 2024 with over 300 attendees and $12K in sponsorships.',
+      'Built impactful projects like Skip the Walk (CLI-based pizza delivery) and Ingredify (OCR-powered food scanner).',
+    ],
   },
 ];
 
@@ -31,7 +44,7 @@ export default function Experiences() {
   const [selected, setSelected] = useState(0);
 
   return (
-    <section className=" flex flex-col items-center justify-center py-20 px-6 lg:px-20 text-[#DCDEFF] w-[70vw] h-[80vh]">
+    <section className=" flex flex-col items-center justify-center py-[40vh] px-6 lg:px-20 text-[#DCDEFF] w-[70vw] h-[100vh]">
       {/* Section Header */}
       <div className="w-full max-w-screen-lg px-4 mb-12">
         <h2 className="flex items-center gap-4 text-4xl font-extrabold text-left">
@@ -59,18 +72,20 @@ export default function Experiences() {
         </div>
 
         {/* Right: Details */}
-        <Box className="flex flex-col gap-4 w-full lg:w-3/4">
+        <Box className="flex flex-col gap-4 w-full lg:w-3/4 min-h-[300px]">
           <Typography variant="h5" fontWeight="bold" color="[#DCDEFF]">
             {companies[selected].role}
           </Typography>
           <Typography variant="body2" className="text-[#DCDEFF]/60 mb-4">
             {companies[selected].date}
           </Typography>
-          <Box display="flex" gap={2} alignItems="flex-start">
-            <HiMiniChevronRight className="mt-1 text-[#72C6B2]" />
-            <Typography className="text-[#DCDEFF]/90 leading-relaxed">
-              {companies[selected].description}
-            </Typography>
+          <Box className="flex flex-col gap-2">
+            {companies[selected].description.map((point, index) => (
+              <Box key={index} display="flex" alignItems="flex-start" gap={1}>
+                <HiMiniChevronRight className="mt-1 text-[#72C6B2]" />
+                <Typography className="text-[#DCDEFF]/90 leading-relaxed">{point}</Typography>
+              </Box>
+            ))}
           </Box>
         </Box>
       </div>

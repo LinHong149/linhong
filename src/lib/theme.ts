@@ -23,33 +23,33 @@ const theme = createTheme({
     }
   },
   typography: {
-    fontFamily: 'var(--font-varela-round)',
+    fontFamily: 'var(--font-poppins)',
     h1: {
-      fontFamily: 'var(--font-varela-round)',
+      fontFamily: 'var(--font-poppins)',
     },
     h2: {
-      fontFamily: 'var(--font-varela-round)',
+      fontFamily: 'var(--font-poppins)',
     },
     h3: {
-      fontFamily: 'var(--font-varela-round)',
+      fontFamily: 'var(--font-poppins)',
     },
     h4: {
-      fontFamily: 'var(--font-varela-round)',
+      fontFamily: 'var(--font-poppins)',
     },
     h5: {
-      fontFamily: 'var(--font-varela-round)',
+      fontFamily: 'var(--font-poppins)',
     },
     h6: {
-      fontFamily: 'var(--font-varela-round)',
+      fontFamily: 'var(--font-poppins)',
     },
     body1: {
-      fontFamily: 'var(--font-varela-round)',
+      fontFamily: 'var(--font-poppins)',
     },
     body2: {
-      fontFamily: 'var(--font-varela-round)',
+      fontFamily: 'var(--font-poppins)',
     },
     button: {
-      fontFamily: 'var(--font-varela-round)',
+      fontFamily: 'var(--font-poppins)',
     },
   },
   // You can add other theme customizations here like spacing, components, etc.

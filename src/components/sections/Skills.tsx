@@ -28,7 +28,7 @@ const skills = {
 
 export default function SkillsSection() {
   return (
-    <section className="w-[80vw] px-6 lg:px-20 py-[50vh] text-[#DCDEFF]">
+    <section className="w-[80vw] px-6 lg:px-20 py-[40vh] text-[#DCDEFF]">
       {/* Section Header */}
       <div className="max-w-screen-xl mx-auto mb-16">
         <h2 className="flex items-center gap-4 text-5xl font-extrabold text-left leading-tight">
