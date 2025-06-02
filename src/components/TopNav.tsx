@@ -6,7 +6,7 @@ const Header = () => {
   const theme = useTheme();
 
   return (
-    <header className="fixed top-0 left-0 right-0 backdrop-blur-md bg-base-100/30 border-primary/20 flex justify-end px-8 py-4">
+    <header className="fixed z-10 top-0 left-0 right-0 backdrop-blur-md bg-base-100/30 border-primary/20 flex justify-end px-8 py-4">
       <Button
         variant="outlined"
         sx={{

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #DCDEFF;
   --foreground: #171717;
 }
 
@@ -15,7 +15,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #DCDEFF;
   }
 }
 
@@ -31,14 +31,17 @@ body::-webkit-scrollbar {
 }
 
 body {
-  background: var(--background);
+  background-color: #09100F;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+canvas {
+  background-color: #09100F !important;
 }
 
 .outlined-text {
   color: transparent;
-  -webkit-text-stroke: 1px #fff;
-  text-stroke: 1px #fff;
+  -webkit-text-stroke: 1px #DCDEFF;
+  text-stroke: 1px #DCDEFF;
 }
 

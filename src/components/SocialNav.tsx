@@ -31,7 +31,7 @@ const socialLinks = [
 
 const SocialNav = () => {
   return (
-    <div className="fixed bottom-0 left-6 hidden lg:flex flex-col items-center gap-6 text-white">
+    <div className="fixed z-10 bottom-0 left-6 hidden lg:flex flex-col items-center gap-6 text-[#72C6B2]" >
       {/* Icons */}
       {socialLinks.map((link, index) => (
         <a
@@ -47,7 +47,7 @@ const SocialNav = () => {
       ))}
 
       {/* Vertical line */}
-      <div className="w-px h-16 bg-white mt-2" />
+      <div className="w-px h-16 bg-[#72C6B2] mt-2" />
     </div>
   );
 };

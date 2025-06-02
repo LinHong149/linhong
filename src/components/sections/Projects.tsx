@@ -27,13 +27,13 @@ export default function ProjectsSection() {
   const theme = useTheme();
 
   return (
-    <section className="w-[80vw] bg-[#0D1117] px-6 lg:px-20 py-24 text-white">
+    <section className="w-[80vw] px-6 lg:px-20 py-24 text-[#DCDEFF]">
       {/* Header */}
       <div className="max-w-screen-xl mx-auto mb-20">
         <h2 className="flex items-center gap-4 text-5xl font-extrabold text-left leading-tight">
           Things I’ve Worked on,
           <span className="text-[#72C6B2]">Some of Them</span>
-          <span className="flex-1 h-px bg-white/20"></span>
+          <span className="flex-1 h-px bg-[#DCDEFF]/20"></span>
         </h2>
       </div>
 
@@ -62,7 +62,7 @@ export default function ProjectsSection() {
 
               {/* Text block */}
               <div className={`w-full lg:w-1/2 flex flex-col gap-4 z-10 ${!isEven ? 'lg:items-end' : ''}`}>
-                <Typography variant="body2" className="text-white/70 text-base">
+                <Typography variant="body2" className="text-[#DCDEFF]/70 text-base">
                   {proj.subtitle}
                 </Typography>
                 <Typography variant="h5" fontWeight="bold" className="text-[#72C6B2] text-2xl">
@@ -82,7 +82,7 @@ export default function ProjectsSection() {
                   }}
                   className={`shadow-xl -mt-12 ${isEven ? 'lg:-ml-16' : 'lg:-mr-16'}`}
                 >
-                  <Typography className="text-white/90 leading-relaxed text-sm lg:text-base">
+                  <Typography className="text-[#DCDEFF]/90 leading-relaxed text-sm lg:text-base">
                     {proj.description}
                   </Typography>
                 </Box>
