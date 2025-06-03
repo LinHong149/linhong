@@ -18,6 +18,7 @@ export default function Home() {
       <TopNav />
       <SocialNav />
       <Main />
+      
 
       <div className="flex flex-col items-center gap-[40vh] py-[30vh]">
         <About />

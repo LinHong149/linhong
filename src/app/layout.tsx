@@ -21,8 +21,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} font-sans antialiased min-h-screen`}>
-        
+      <body className={`${poppins.variable} font-sans antialiased min-h-screen bg-[#09100F]`}>
+        <meta name="theme-color" content="#09100F" />
         <ThemeRegistry>{children}</ThemeRegistry>
       </body>
     </html>

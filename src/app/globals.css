@@ -12,12 +12,15 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #09100F;
     --foreground: #DCDEFF;
   }
 }
 
+
 html, body {
+  background-color: #09100F;
+  /* overscroll-behavior-y: none; */
   overflow-y: scroll;           /* allow scrolling */
   -ms-overflow-style: none;     /* IE and Edge */
   scrollbar-width: none;        /* Firefox */

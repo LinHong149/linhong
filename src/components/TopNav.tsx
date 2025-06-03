@@ -6,25 +6,40 @@ const Header = () => {
   const theme = useTheme();
 
   return (
-    <header className="fixed z-12 top-0 left-0 right-0 backdrop-blur-sm bg-base-100/30 border-primary/20 flex justify-end px-12 py-8">
-      <a href="/Resume.pdf" target="_blank" rel="noopener noreferrer">
-        <Button
-          variant="outlined"
-          sx={{
-            textTransform: 'none',
-            color: theme.palette.common.white,
-            borderColor: theme.palette.common.white,
-            fontSize: '.9rem',
-            '&:hover': {
-              backgroundColor: 'rgba(255, 255, 255, 0.08)',
-              borderColor: theme.palette.common.white,
-            },
-          }}
-        >
-          Resume
-        </Button>
-      </a>
-    </header>
+    <header
+  className="fixed z-50 top-0 left-0 right-0 flex justify-end px-12 py-8"
+  style={{
+    position: 'fixed',
+    zIndex: 50,
+  }}
+>
+  <div className="absolute inset-0 pointer-events-none" style={{
+    backdropFilter: 'blur(12px)',
+    WebkitBackdropFilter: 'blur(12px)',
+    background: 'linear-gradient(to bottom, rgba(9, 16, 15, 0.6), rgba(9, 16, 15, 0.2))',
+    maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))',
+    WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))',
+    zIndex: -1,
+  }} />
+
+  <a href="/Resume.pdf" target="_blank" rel="noopener noreferrer">
+    <Button
+      variant="outlined"
+      sx={{
+        textTransform: 'none',
+        color: theme.palette.common.white,
+        borderColor: theme.palette.common.white,
+        fontSize: '.9rem',
+        '&:hover': {
+          backgroundColor: 'rgba(255, 255, 255, 0.08)',
+          borderColor: theme.palette.common.white,
+        },
+      }}
+    >
+      Resume
+    </Button>
+  </a>
+</header>
   );
 };
 
