@@ -23,6 +23,14 @@ const Main = () => {
 
         <Button
           variant="outlined"
+          onClick={() => {
+            const el = document.getElementById('projects');
+            if (el) {
+              const offset = -200; // adjust as needed (negative scrolls up)
+              const y = el.getBoundingClientRect().top + window.scrollY + offset;
+              window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+          }}
           sx={{
             textTransform: 'none',
             color: theme.palette.common.white,

@@ -4,7 +4,8 @@ import { useTheme } from '@mui/material/styles';
 import Image from 'next/image';
 import { Box, Typography } from '@mui/material';
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
-
+import { motion, useAnimation, useInView } from 'framer-motion';
+import { useRef, useEffect, useState } from 'react';
 
 
 const projects = [
@@ -37,109 +38,175 @@ const projects = [
     },
 ];
 
-export default function ProjectsSection() {
+export default function Projects({ id }: { id?: string }) {
     const theme = useTheme();
 
     return (
-        <section className="w-[80vw] px-6 lg:px-20 py-24 text-[#DCDEFF]">
-            {/* Header */}
-            <div className="max-w-screen-xl mx-auto mb-20">
-                <h2 className="flex items-center gap-4 text-5xl font-extrabold text-left leading-tight">
-                    Things I've Worked on,
-                    <span className="text-[#72C6B2]">Some of Them</span>
-                    <span className="flex-1 h-px bg-[#DCDEFF]/20"></span>
-                </h2>
-            </div>
+        <section id={id} className="w-[80vw] px-6 lg:px-20 h-min text-[#DCDEFF]">
+            {/* Section Title */}
+            <motion.h2
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+                viewport={{ once: false, amount: 0.6 }}
+                className="max-w-screen-xl mx-auto mb-20 flex items-center gap-4 text-5xl font-extrabold text-left leading-tight"
+            >
+                Things I've Worked on,
+                <span className="text-[#72C6B2]">Some of Them</span>
+                <span className="flex-1 h-px bg-[#DCDEFF]/20"></span>
+            </motion.h2>
 
-            {/* Project list */}
+            {/* Project List */}
             <div className="flex flex-col gap-28 max-w-screen-xl mx-auto">
-                {projects.map((proj, i) => {
-                    const isEven = i % 2 === 0;
-
-                    return (
-                        <div
-                            key={proj.title}
-                            className={`relative flex flex-col lg:flex-row items-center gap-12 ${!isEven ? 'lg:flex-row-reverse' : ''
-                                }`}
-                        >
-                            {/* Image */}
-                            <div className="w-full lg:w-1/2 aspect-[4/3] relative rounded-lg overflow-hidden shadow-lg group">
-                                <a
-                                    href={proj.github}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label={`${proj.title} GitHub`}
-                                    className="w-full h-full block"
-                                >
-                                    <div className="w-full h-full grayscale transition duration-500 group-hover:grayscale-0">
-                                        <Image
-                                            src={proj.image}
-                                            alt={proj.title}
-                                            layout="fill"
-                                            objectFit="cover"
-                                            className="rounded-lg"
-                                        />
-                                    </div>
-                                </a>
-                            </div>
-
-                            {/* Text block */}
-                            <div className={`w-full lg:w-1/2 flex flex-col gap-4 z-10 ${!isEven ? 'lg:items-end' : ''}`}>
-                                <Typography variant="body2" className="text-[#DCDEFF]/70 text-base">
-                                    {proj.subtitle}
-                                </Typography>
-                                <Typography variant="h5" fontWeight="bold" className="text-[#72C6B2] text-2xl">
-                                    {proj.title}
-                                </Typography>
-
-                                {/* Description box */}
-                                <Box
-                                    sx={{
-                                        backgroundColor: '#463967',
-                                        padding: '1.5rem',
-                                        borderRadius: '8px',
-                                        marginTop: '1rem',
-                                        marginBottom: '0.5rem',
-                                        maxWidth: '100%',
-                                    }}
-                                    className={`shadow-xl -mt-12 ${isEven ? 'lg:-ml-16' : 'lg:-mr-16'}`}
-                                >
-                                    <Typography className="text-[#DCDEFF]/90 leading-relaxed text-sm lg:text-base">
-                                        {proj.description}
-                                    </Typography>
-                                </Box>
-
-                                {/* Tech stack */}
-                                <Typography variant="body2" className="text-[#72C6B2] text-sm mt-1">
-                                    {proj.tech.join(' | ')}
-                                </Typography>
-
-                                {/* Links */}
-                                <div className="flex gap-4 mt-2 text-[#DCDEFF]">
-                                    <a
-                                        href={proj.github}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        aria-label={`${proj.title} GitHub`}
-                                        className="hover:text-[#72C6B2] transition-colors"
-                                    >
-                                        <FiGithub className="w-5 h-5" />
-                                    </a>
-                                    <a
-                                        href={proj.external}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        aria-label={`${proj.title} Devpost or DoraHacks`}
-                                        className="hover:text-[#72C6B2] transition-colors"
-                                    >
-                                        <FiExternalLink className="w-5 h-5" />
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    );
-                })}
+                {projects.map((proj, i) => (
+                    <AnimatedProject key={proj.title} proj={proj} isEven={i % 2 === 0} />
+                ))}
             </div>
         </section>
     );
+
+    function AnimatedProject({ proj, isEven }: { proj: typeof projects[0]; isEven: boolean }) {
+        const ref = useRef<HTMLDivElement>(null);
+        const inView = useInView(ref, { amount: 0.6 });
+        const controls = useAnimation();
+
+        const [scrollY, setScrollY] = useState(0);
+        const [lastY, setLastY] = useState(0);
+
+        useEffect(() => {
+            const onScroll = () => {
+                setLastY(scrollY);
+                setScrollY(window.scrollY);
+            };
+            window.addEventListener('scroll', onScroll);
+            return () => window.removeEventListener('scroll', onScroll);
+        }, [scrollY]);
+
+        useEffect(() => {
+            const isScrollingDown = scrollY > lastY;
+            const refTop = ref.current?.offsetTop ?? Infinity;
+
+            if (inView && isScrollingDown) {
+                controls.start('visible');
+            } else if (!inView && scrollY < refTop) {
+                controls.start('hidden');
+            }
+        }, [inView, scrollY, lastY]);
+
+        return (
+            <motion.div
+                ref={ref}
+                key={proj.title}
+                className={`relative flex flex-col lg:flex-row items-center gap-12 ${!isEven ? 'lg:flex-row-reverse' : ''}`}
+                initial="hidden"
+                animate={controls}
+                variants={{
+                    hidden: { opacity: 0, y: 40, scale: 0.95 },
+                    visible: {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        transition: { duration: 0.3, ease: 'easeOut' },
+                    },
+                }}
+            >
+
+
+                {/* Image */}
+                <div className="w-full lg:w-1/2 aspect-[4/3] relative rounded-lg overflow-hidden shadow-lg group">
+                    <a
+                        href={proj.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full h-full block"
+                    >
+                        <div className="w-full h-full grayscale transition duration-500 group-hover:grayscale-0">
+                            <Image
+                                src={proj.image}
+                                alt={proj.title}
+                                layout="fill"
+                                objectFit="cover"
+                                className="rounded-lg"
+                            />
+                        </div>
+                    </a>
+                </div>
+
+                {/* Text */}
+                <div
+                    className={`w-full lg:w-1/2 flex flex-col gap-4 z-10  ${isEven ? '' : 'lg:items-end'
+                        }`}
+                >
+                    <Typography variant="body2" className="text-[#DCDEFF]/70 text-base">
+                        {proj.subtitle}
+                    </Typography>
+                    <Typography
+                        variant="h5"
+                        fontWeight="bold"
+                        className="text-[#72C6B2] text-2xl"
+                    >
+                        {proj.title}
+                    </Typography>
+
+                    {/* Description Animation */}
+                    <motion.div
+                        initial={{ opacity: 0, x: isEven ? 40 : -40, scale: 0.8 }}
+                        animate={controls}
+                        variants={{
+                            hidden: { opacity: 0, x: isEven ? 40 : -40, scale: 0.8 },
+                            visible: {
+                                opacity: 1,
+                                x: 0,
+                                scale: 1,
+                                transition: { delay: 0, duration: 0.3, ease: 'easeOut' },
+                            },
+                        }}
+                    >
+
+                        <div className={`shadow-xl ${isEven ? 'lg:-ml-16' : 'lg:-mr-16'}`}>
+                            <Box
+                                sx={{
+                                    backgroundColor: '#463967',
+                                    padding: '1.5rem',
+                                    borderRadius: '8px',
+                                    maxWidth: '100%',
+                                }}
+                            >
+                                <Typography className="text-[#DCDEFF]/90 leading-relaxed text-sm lg:text-base">
+                                    {proj.description}
+                                </Typography>
+                            </Box>
+                        </div>
+                    </motion.div>
+
+                    {/* Tech */}
+                    <Typography variant="body2" className="text-[#72C6B2] text-sm mt-1">
+                        {proj.tech.join(' | ')}
+                    </Typography>
+
+                    {/* Links */}
+                    <div className="flex gap-4 mt-2 text-[#DCDEFF]">
+                        <a
+                            href={proj.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-[#72C6B2] transition-colors"
+                        >
+                            <FiGithub className="w-5 h-5" />
+                        </a>
+                        <a
+                            href={proj.external}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-[#72C6B2] transition-colors"
+                        >
+                            <FiExternalLink className="w-5 h-5" />
+                        </a>
+                    </div>
+                </div>
+
+                {/* Your image/text/box code goes here (same as before) */}
+            </motion.div>
+        );
+    }
 }

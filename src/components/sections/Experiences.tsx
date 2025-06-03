@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { HiMiniChevronRight } from 'react-icons/hi2';
+import { motion, useInView, useAnimation } from 'framer-motion';
 
 const companies = [
   {
@@ -43,21 +44,79 @@ export default function Experiences() {
   const theme = useTheme();
   const [selected, setSelected] = useState(0);
 
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { amount: 0.4 });
+  const controls = useAnimation();
+
+  const [scrollY, setScrollY] = useState(0);
+  const [lastY, setLastY] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setLastY(scrollY);
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [scrollY]);
+
+  useEffect(() => {
+    const refTop = ref.current?.offsetTop ?? Infinity;
+    const isScrollingDown = scrollY > lastY;
+
+    if (isInView && isScrollingDown) {
+      controls.start('visible');
+    } else if (!isInView && scrollY < refTop) {
+      controls.start('hidden');
+    }
+  }, [isInView, scrollY, lastY, controls]);
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 80 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        // delayChildren: 0.3,  
+        // delay: 0.3,  
+        ease: 'easeOut',
+      },
+    },
+  };
+
+  const childVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
-    <section className=" flex flex-col items-center justify-center py-[40vh] px-6 lg:px-20 text-[#DCDEFF] w-[70vw] h-[100vh]">
+    <motion.section
+      ref={ref}
+      className="flex flex-col items-center justify-center px-6 lg:px-20 text-[#DCDEFF] w-[70vw] h-min"
+      variants={containerVariants}
+      initial="hidden"
+      animate={controls}
+    >
       {/* Section Header */}
-      <div className="w-full max-w-screen-lg px-4 mb-12">
+      <motion.div className="w-full max-w-screen-lg px-4 mb-12" variants={childVariants}>
         <h2 className="flex items-center gap-4 text-4xl font-extrabold text-left">
           <span className="text-[#DCDEFF]">My</span>
           <span style={{ color: theme.palette.primary.main }}>Work Experiences</span>
           <span className="flex-1 h-px bg-[#DCDEFF]/20"></span>
         </h2>
-      </div>
+      </motion.div>
 
       {/* Main Content */}
-      <div className="flex flex-col lg:flex-row gap-12 w-full max-w-screen-lg text-[#DCDEFF]">
+      <motion.div
+        className="flex flex-col lg:flex-row gap-12 w-full max-w-screen-lg text-[#DCDEFF]"
+        variants={containerVariants}
+      >
         {/* Left: Company list */}
-        <div className="flex flex-col gap-6 text-left border-l-2 h-fit pl-4 border-[#DCDEFF]/20 w-full lg:w-1/4">
+        <motion.div
+          className="flex flex-col gap-6 text-left border-l-2 h-fit pl-4 border-[#DCDEFF]/20 w-full lg:w-1/4"
+          variants={childVariants}
+        >
           {companies.map((company, i) => (
             <button
               key={company.name}
@@ -69,10 +128,13 @@ export default function Experiences() {
               {company.name}
             </button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Right: Details */}
-        <Box className="flex flex-col gap-4 w-full lg:w-3/4 min-h-[300px]">
+        <motion.div
+          className="flex flex-col gap-4 w-full lg:w-3/4 min-h-[300px]"
+          variants={childVariants}
+        >
           <Typography variant="h5" fontWeight="bold" color="[#DCDEFF]">
             {companies[selected].role}
           </Typography>
@@ -83,12 +145,14 @@ export default function Experiences() {
             {companies[selected].description.map((point, index) => (
               <Box key={index} display="flex" alignItems="flex-start" gap={1}>
                 <HiMiniChevronRight className="mt-1 text-[#72C6B2]" />
-                <Typography className="text-[#DCDEFF]/90 leading-relaxed">{point}</Typography>
+                <Typography className="text-[#DCDEFF]/90 leading-relaxed">
+                  {point}
+                </Typography>
               </Box>
             ))}
           </Box>
-        </Box>
-      </div>
-    </section>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 }
