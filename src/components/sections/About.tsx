@@ -36,7 +36,6 @@ export default function About() {
     visible: {
       transition: {
         staggerChildren: 0.2,
-        // delayChildren: 0.3,  
       },
     },
   };
@@ -59,23 +58,22 @@ export default function About() {
     },
   };
 
-//   const animationState = isAboveView || !isBelowView ? 'visible' : 'hidden';
+  const animationState = isAboveView || !isBelowView ? 'visible' : 'hidden';
 
   return (
     <motion.section
       ref={ref}
-      className="flex flex-col items-center justify-center  px-6 lg:px-20 text-[#DCDEFF] w-[70vw] h-min"
+      className="flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 text-[#DCDEFF] w-[80vw]  lg:w-full max-w-4xl h-min"
       variants={containerVariants}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, amount: 0.4}}
+      animate={animationState}
     >
       {/* Section Header */}
       <motion.div
-        className="w-full max-w-screen-lg mb-12"
+        className="w-full mb-8"
         variants={fadeUp}
       >
-        <h2 className="flex items-center gap-4 text-4xl font-extrabold text-left">
+        <h2 className="flex items-center gap-2 text-2xl sm:text-3xl md:text-4xl font-extrabold text-left whitespace-nowrap">
           <span className="text-[#DCDEFF]">About</span>
           <span style={{ color: theme.palette.primary.main }}>Me</span>
           <span className="flex-1 h-px bg-[#DCDEFF]/20"></span>
@@ -83,7 +81,7 @@ export default function About() {
       </motion.div>
 
       {/* Main Content */}
-      <div className="flex flex-col lg:flex-row gap-12 w-full max-w-screen-lg text-[#DCDEFF]">
+      <div className="flex flex-col lg:flex-row gap-8 w-full text-[#DCDEFF]">
         {/* Left: Text */}
         <motion.div
           className="flex flex-col gap-4 text-left w-full lg:w-3/5"
@@ -96,8 +94,8 @@ export default function About() {
             from developer tooling to AI-powered applications.
           </Typography>
           <Typography className="text-[#DCDEFF]/90 leading-relaxed">
-            I’ve been to over 20 hackathons, won 10+ awards, and founded my own event — GeeseHacks
-            — to give back to the community. I’m also the founder of Linovation Design, where I
+            I've been to over 20 hackathons, won 10+ robotics awards, and organized over 6 hackathons 
+            to give back to the community. I'm also the founder of Linovation Design, where I
             built websites and ERP systems that helped local businesses improve operations.
           </Typography>
           <Typography className="text-[#DCDEFF]/90 leading-relaxed">
@@ -112,15 +110,17 @@ export default function About() {
           className="relative w-full lg:w-2/5 flex justify-center items-start group"
           variants={fadeRight}
         >
-          <div className="absolute top-4 left-4 w-[320px] aspect-square border-2 border-white opacity-70 rounded-xl transition-transform duration-300 group-hover:-translate-x-2 group-hover:-translate-y-2 z-0 pointer-events-none" />
-          <div className="relative rounded-xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-300 z-10 w-[320px] aspect-square">
-            <Image
-              src="/Portrait.png"
-              alt="Lin Hong"
-              width={400}
-              height={400}
-              className="object-cover w-full h-full"
-            />
+          <div className="relative w-[320px] aspect-square">
+            <div className="absolute top-4 left-4 w-full h-full border-2 border-white opacity-70 rounded-xl transition-transform duration-300 sm:group-hover:-translate-x-2 sm:group-hover:-translate-y-2 z-0 pointer-events-none" />
+            <div className="relative rounded-xl overflow-hidden sm:grayscale sm:hover:grayscale-0 transition-all duration-300 z-10 w-full h-full">
+              <Image
+                src="/Portrait.png"
+                alt="Lin Hong"
+                width={400}
+                height={400}
+                className="object-cover w-full h-full rounded-xl"
+              />
+            </div>
           </div>
         </motion.div>
       </div>

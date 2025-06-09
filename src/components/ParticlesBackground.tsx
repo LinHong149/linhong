@@ -8,7 +8,7 @@ const ParticlesBg = dynamic(() => import('particles-bg'), {
 
 const ParticlesBackground = () => {
   return (
-    <div className='z-10 bg-[#09100F]'>
+    <div className='z-10 bg-[#0A1110]'>
 
     <ParticlesBg
       type="cobweb"

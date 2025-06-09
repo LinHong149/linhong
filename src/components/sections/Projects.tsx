@@ -7,7 +7,6 @@ import { FiGithub, FiExternalLink } from 'react-icons/fi';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 
-
 const projects = [
     {
         title: 'Lofied',
@@ -16,7 +15,7 @@ const projects = [
         tech: ['Python', 'Web Audio API', 'React', 'Flask', 'FFmpeg'],
         image: '/projects/Lofied.png',
         github: 'https://github.com/LinHong149/lofied',
-        external: 'https://dorahacks.io/buidl/26392', // or DoraHacks link
+        external: 'https://dorahacks.io/buidl/26392',
     },
     {
         title: 'Skip the Walk',
@@ -42,14 +41,14 @@ export default function Projects({ id }: { id?: string }) {
     const theme = useTheme();
 
     return (
-        <section id={id} className="w-[80vw] px-6 lg:px-20 h-min text-[#DCDEFF]">
+        <section id={id} className="w-full px-4 sm:px-6 lg:px-8 text-[#DCDEFF] h-min">
             {/* Section Title */}
             <motion.h2
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, ease: 'easeOut' }}
-                viewport={{ once: false, amount: 0.6 }}
-                className="max-w-screen-xl mx-auto mb-20 flex items-center gap-4 text-5xl font-extrabold text-left leading-tight"
+                viewport={{ once: false, amount: 1.0 }}
+                className="max-w-4xl mx-auto mb-12 sm:mb-16 md:mb-20 flex flex-col sm:flex-row items-center gap-4 text-2xl sm:text-3xl md:text-4xl font-extrabold text-left leading-tight"
             >
                 Things I've Worked on,
                 <span className="text-[#72C6B2]">Some of Them</span>
@@ -57,7 +56,7 @@ export default function Projects({ id }: { id?: string }) {
             </motion.h2>
 
             {/* Project List */}
-            <div className="flex flex-col gap-28 max-w-screen-xl mx-auto">
+            <div className="flex flex-col gap-28 max-w-7xl mx-auto px-8 sm:px-6 md:px-8">
                 {projects.map((proj, i) => (
                     <AnimatedProject key={proj.title} proj={proj} isEven={i % 2 === 0} />
                 ))}
@@ -67,7 +66,7 @@ export default function Projects({ id }: { id?: string }) {
 
     function AnimatedProject({ proj, isEven }: { proj: typeof projects[0]; isEven: boolean }) {
         const ref = useRef<HTMLDivElement>(null);
-        const inView = useInView(ref, { amount: 0.6 });
+        const inView = useInView(ref, { amount: 1.0 });
         const controls = useAnimation();
 
         const [scrollY, setScrollY] = useState(0);
@@ -83,21 +82,21 @@ export default function Projects({ id }: { id?: string }) {
         }, [scrollY]);
 
         useEffect(() => {
-            const isScrollingDown = scrollY > lastY;
             const refTop = ref.current?.offsetTop ?? Infinity;
+            const viewportHeight = window.innerHeight;
+            const elementTop = refTop - scrollY;
 
-            if (inView && isScrollingDown) {
+            if (elementTop < viewportHeight) {
                 controls.start('visible');
-            } else if (!inView && scrollY < refTop) {
+            } else {
                 controls.start('hidden');
             }
-        }, [inView, scrollY, lastY]);
+        }, [scrollY, lastY]);
 
         return (
             <motion.div
                 ref={ref}
-                key={proj.title}
-                className={`relative flex flex-col lg:flex-row items-center gap-12 ${!isEven ? 'lg:flex-row-reverse' : ''}`}
+                className={`relative flex flex-col lg:flex-row items-center gap-0 sm:gap-8 ${!isEven ? 'lg:flex-row-reverse' : ''}`}
                 initial="hidden"
                 animate={controls}
                 variants={{
@@ -110,102 +109,133 @@ export default function Projects({ id }: { id?: string }) {
                     },
                 }}
             >
-
-
                 {/* Image */}
-                <div className="w-full lg:w-1/2 aspect-[4/3] relative rounded-lg overflow-hidden shadow-lg group">
+                <div className="w-full lg:w-1/2 aspect-[4/3] relative rounded-t-lg lg:rounded-lg overflow-hidden shadow-lg group">
                     <a
                         href={proj.github}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full h-full block"
                     >
-                        <div className="w-full h-full grayscale transition duration-500 group-hover:grayscale-0">
-                            <Image
-                                src={proj.image}
-                                alt={proj.title}
-                                layout="fill"
-                                objectFit="cover"
-                                className="rounded-lg"
-                            />
-                        </div>
+                        <Image
+                            src={proj.image}
+                            alt={proj.title}
+                            layout="fill"
+                            objectFit="cover"
+                            className="rounded-t-lg lg:rounded-lg sm:grayscale sm:hover:grayscale-0 transition-all duration-300"
+                        />
                     </a>
                 </div>
 
                 {/* Text */}
-                <div
-                    className={`w-full lg:w-1/2 flex flex-col gap-4 z-10  ${isEven ? '' : 'lg:items-end'
-                        }`}
-                >
-                    <Typography variant="body2" className="text-[#DCDEFF]/70 text-base">
-                        {proj.subtitle}
-                    </Typography>
-                    <Typography
-                        variant="h5"
-                        fontWeight="bold"
-                        className="text-[#72C6B2] text-2xl"
-                    >
-                        {proj.title}
-                    </Typography>
-
-                    {/* Description Animation */}
-                    <motion.div
-                        initial={{ opacity: 0, x: isEven ? 40 : -40, scale: 0.8 }}
-                        animate={controls}
-                        variants={{
-                            hidden: { opacity: 0, x: isEven ? 40 : -40, scale: 0.8 },
-                            visible: {
-                                opacity: 1,
-                                x: 0,
-                                scale: 1,
-                                transition: { delay: 0, duration: 0.3, ease: 'easeOut' },
-                            },
-                        }}
-                    >
-
-                        <div className={`shadow-xl ${isEven ? 'lg:-ml-16' : 'lg:-mr-16'}`}>
-                            <Box
-                                sx={{
-                                    backgroundColor: '#463967',
-                                    padding: '1.5rem',
-                                    borderRadius: '8px',
-                                    maxWidth: '100%',
-                                }}
+                <div className={`w-full lg:w-1/2 flex flex-col gap-4 z-10 ${isEven ? '' : 'lg:items-end'}`}>
+                    {/* Mobile Card Layout */}
+                    <div className="lg:hidden flex flex-col gap-4 bg-[#463967] p-6 rounded-b-lg lg:rounded-lg shadow-xl">
+                        <Typography variant="body2" className="text-[#DCDEFF]/70 text-sm">
+                            {proj.subtitle}
+                        </Typography>
+                        <Typography
+                            variant="h5"
+                            fontWeight="bold"
+                            className="text-[#72C6B2] text-xl"
+                        >
+                            {proj.title}
+                        </Typography>
+                        <Typography className="text-[#DCDEFF]/90 leading-relaxed text-sm">
+                            {proj.description}
+                        </Typography>
+                        <Typography variant="body2" className="text-[#72C6B2] text-sm mt-2">
+                            {proj.tech.join(' | ')}
+                        </Typography>
+                        <div className="flex gap-4 mt-2 text-[#DCDEFF]">
+                            <a
+                                href={proj.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-[#72C6B2] transition-colors"
                             >
-                                <Typography className="text-[#DCDEFF]/90 leading-relaxed text-sm lg:text-base">
-                                    {proj.description}
-                                </Typography>
-                            </Box>
+                                <FiGithub className="w-5 h-5" />
+                            </a>
+                            <a
+                                href={proj.external}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-[#72C6B2] transition-colors"
+                            >
+                                <FiExternalLink className="w-5 h-5" />
+                            </a>
                         </div>
-                    </motion.div>
+                    </div>
 
-                    {/* Tech */}
-                    <Typography variant="body2" className="text-[#72C6B2] text-sm mt-1">
-                        {proj.tech.join(' | ')}
-                    </Typography>
+                    {/* Desktop Layout */}
+                    <div className="hidden lg:flex flex-col gap-4">
+                        <Typography variant="body2" className="text-[#DCDEFF]/70 text-sm">
+                            {proj.subtitle}
+                        </Typography>
+                        <Typography
+                            variant="h5"
+                            fontWeight="bold"
+                            className="text-[#72C6B2] text-xl"
+                        >
+                            {proj.title}
+                        </Typography>
 
-                    {/* Links */}
-                    <div className="flex gap-4 mt-2 text-[#DCDEFF]">
-                        <a
-                            href={proj.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-[#72C6B2] transition-colors"
+                        {/* Description Animation */}
+                        <motion.div
+                            initial={{ opacity: 0, x: isEven ? 40 : -40, scale: 0.8 }}
+                            animate={controls}
+                            variants={{
+                                hidden: { opacity: 0, x: isEven ? 40 : -40, scale: 0.8 },
+                                visible: {
+                                    opacity: 1,
+                                    x: 0,
+                                    scale: 1,
+                                    transition: { delay: 0, duration: 0.3, ease: 'easeOut' },
+                                },
+                            }}
                         >
-                            <FiGithub className="w-5 h-5" />
-                        </a>
-                        <a
-                            href={proj.external}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-[#72C6B2] transition-colors"
-                        >
-                            <FiExternalLink className="w-5 h-5" />
-                        </a>
+                            <div className={`shadow-xl ${isEven ? 'lg:-ml-16' : 'lg:-mr-16'}`}>
+                                <Box
+                                    sx={{
+                                        backgroundColor: '#463967',
+                                        padding: '1.5rem',
+                                        borderRadius: '8px',
+                                        maxWidth: '100%',
+                                    }}
+                                >
+                                    <Typography className="text-[#DCDEFF]/90 leading-relaxed text-sm lg:text-base">
+                                        {proj.description}
+                                    </Typography>
+                                </Box>
+                            </div>
+                        </motion.div>
+
+                        {/* Tech */}
+                        <Typography variant="body2" className="text-[#72C6B2] text-sm mt-2">
+                            {proj.tech.join(' | ')}
+                        </Typography>
+
+                        {/* Links */}
+                        <div className="flex gap-4 mt-2 text-[#DCDEFF]">
+                            <a
+                                href={proj.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-[#72C6B2] transition-colors"
+                            >
+                                <FiGithub className="w-5 h-5" />
+                            </a>
+                            <a
+                                href={proj.external}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-[#72C6B2] transition-colors"
+                            >
+                                <FiExternalLink className="w-5 h-5" />
+                            </a>
+                        </div>
                     </div>
                 </div>
-
-                {/* Your image/text/box code goes here (same as before) */}
             </motion.div>
         );
     }

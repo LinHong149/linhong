@@ -24,7 +24,7 @@ const companies = [
     date: 'Onsite | June 2024 – August 2024',
     description: [
       'Founded a freelance design agency offering custom websites and ERP tools to local businesses.',
-      'Generated $2.3K profit in 2 months; improved a client’s operational efficiency by 10%.',
+      'Generated $2.3K profit in 2 months; improved a client\'s operational efficiency by 10%.',
       'Pitched to businesses in person, online, and at trade fairs — overcoming personal introversion.',
     ],
   },
@@ -45,7 +45,7 @@ export default function Experiences() {
   const [selected, setSelected] = useState(0);
 
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { amount: 0.4 });
+  const isInView = useInView(ref, { amount: 0.6 });
   const controls = useAnimation();
 
   const [scrollY, setScrollY] = useState(0);
@@ -78,8 +78,6 @@ export default function Experiences() {
       y: 0,
       transition: {
         duration: 0.6,
-        // delayChildren: 0.3,  
-        // delay: 0.3,  
         ease: 'easeOut',
       },
     },
@@ -93,14 +91,14 @@ export default function Experiences() {
   return (
     <motion.section
       ref={ref}
-      className="flex flex-col items-center justify-center px-6 lg:px-20 text-[#DCDEFF] w-[70vw] h-min"
+      className="flex flex-col items-center justify-center px-8 sm:px-8 lg:px-8 text-[#DCDEFF] w-full max-w-4xl h-min"
       variants={containerVariants}
       initial="hidden"
       animate={controls}
     >
       {/* Section Header */}
-      <motion.div className="w-full max-w-screen-lg px-4 mb-12" variants={childVariants}>
-        <h2 className="flex items-center gap-4 text-4xl font-extrabold text-left">
+      <motion.div className="w-full mb-8" variants={childVariants}>
+        <h2 className="flex items-center gap-2 text-2xl sm:text-3xl md:text-4xl font-extrabold text-left whitespace-nowrap">
           <span className="text-[#DCDEFF]">My</span>
           <span style={{ color: theme.palette.primary.main }}>Work Experiences</span>
           <span className="flex-1 h-px bg-[#DCDEFF]/20"></span>
@@ -109,20 +107,22 @@ export default function Experiences() {
 
       {/* Main Content */}
       <motion.div
-        className="flex flex-col lg:flex-row gap-12 w-full max-w-screen-lg text-[#DCDEFF]"
+        className="flex flex-col lg:flex-row gap-8 "
         variants={containerVariants}
       >
-        {/* Left: Company list */}
+        {/* Company tabs */}
         <motion.div
-          className="flex flex-col gap-6 text-left border-l-2 h-fit pl-4 border-[#DCDEFF]/20 w-full lg:w-1/4"
+          className="h-min flex flex-row items-start lg:flex-col gap-2 lg:gap-6 overflow-x-auto lg:overflow-visible lg:pb-0 border-b-2 lg:border-b-0 lg:border-l-2 border-[#DCDEFF]/20 box-border"
           variants={childVariants}
         >
           {companies.map((company, i) => (
             <button
               key={company.name}
               onClick={() => setSelected(i)}
-              className={`text-left font-medium transition-colors duration-200 ${
-                selected === i ? 'text-[#72C6B2]' : 'text-[#DCDEFF]/70 hover:text-[#DCDEFF]'
+              className={`whitespace-nowrap px-4 py-2 lg:pl-4 lg:pr-0 text-sm sm:text-base font-medium transition-colors duration-200 rounded-t-lg lg:rounded-none ${
+                selected === i
+                  ? 'text-[#72C6B2] border-b-2 lg:border-b-0 lg:border-l-2 border-[#72C6B2]'
+                  : 'text-[#DCDEFF]/70 hover:text-[#DCDEFF]'
               }`}
             >
               {company.name}
@@ -130,27 +130,28 @@ export default function Experiences() {
           ))}
         </motion.div>
 
-        {/* Right: Details */}
+        {/* Details */}
         <motion.div
-          className="flex flex-col gap-4 w-full lg:w-3/4 min-h-[300px]"
+          className="flex flex-col gap-4 min-h-[300px] h-full"
           variants={childVariants}
         >
-          <Typography variant="h5" fontWeight="bold" color="[#DCDEFF]">
-            {companies[selected].role}
-          </Typography>
-          <Typography variant="body2" className="text-[#DCDEFF]/60 mb-4">
-            {companies[selected].date}
-          </Typography>
-          <Box className="flex flex-col gap-2">
-            {companies[selected].description.map((point, index) => (
-              <Box key={index} display="flex" alignItems="flex-start" gap={1}>
-                <HiMiniChevronRight className="mt-1 text-[#72C6B2]" />
-                <Typography className="text-[#DCDEFF]/90 leading-relaxed">
-                  {point}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
+          <div className="flex flex-col gap-4 h-full">
+            <Typography variant="h6" fontWeight="bold" color="[#DCDEFF]">
+              {companies[selected].role}
+            </Typography>
+            <Typography variant="body2" className="text-[#DCDEFF]/60">
+              {companies[selected].date}
+            </Typography>
+            <Box className="flex flex-col gap-2 flex-grow">
+              {companies[selected].description.map((point, index) => (
+                <Box key={index} display="flex" alignItems="flex-start" gap={1}>
+                  <Typography variant="body2" className="text-[#DCDEFF]/90 text-sm sm:text-base leading-relaxed">
+                    • {point}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </div>
         </motion.div>
       </motion.div>
     </motion.section>

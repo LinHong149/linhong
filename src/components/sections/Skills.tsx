@@ -61,7 +61,7 @@ export default function SkillsSection() {
         transition={{ duration: 0.4, ease: 'easeOut' }}
         viewport={{ once: false, amount: 0.6 }}
       >
-        <h2 className="flex items-center gap-4 text-5xl font-extrabold text-left leading-tight">
+        <h2 className="flex items-center gap-4 text-2xl sm:text-3xl md:text-4xl font-extrabold text-left leading-tight">
           My <span className="text-[#72C6B2]">Skills</span>
           <span className="flex-1 h-px bg-[#DCDEFF]/20"></span>
         </h2>

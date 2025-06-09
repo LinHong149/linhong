@@ -12,14 +12,14 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #09100F;
+    --background: #0A1110;
     --foreground: #DCDEFF;
   }
 }
 
 
 html, body {
-  background-color: #09100F;
+  background-color: #0A1110;
   /* overscroll-behavior-y: none; */
   overflow-y: scroll;           /* allow scrolling */
   -ms-overflow-style: none;     /* IE and Edge */
@@ -32,13 +32,13 @@ body::-webkit-scrollbar {
 }
 
 body {
-  background-color: #09100F;
+  background-color: #0A1110;
   color: var(--foreground);
   font-family: var(--font-poppins), sans-serif;
 }
 
 canvas {
-  background-color: #09100F !important;
+  background-color: #0A1110 !important;
 }
 
 .outlined-text {
