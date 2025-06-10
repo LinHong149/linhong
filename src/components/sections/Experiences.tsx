@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { HiMiniChevronRight } from 'react-icons/hi2';
 import { motion, useInView, useAnimation } from 'framer-motion';
 
 const companies = [

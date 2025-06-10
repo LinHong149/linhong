@@ -12,7 +12,6 @@ export default function About() {
 
   const [isAboveView, setIsAboveView] = useState(false);
   const [isBelowView, setIsBelowView] = useState(true);
-  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,7 +22,6 @@ export default function About() {
 
       setIsAboveView(top + height < 0); // completely above screen
       setIsBelowView(top > window.innerHeight); // completely below screen
-      setScrollY(window.scrollY);
     };
 
     handleScroll(); // call on mount
@@ -88,19 +86,19 @@ export default function About() {
           variants={fadeUp}
         >
           <Typography className="text-[#DCDEFF]/90 leading-relaxed">
-            Hey! I'm <span className="text-[#72C6B2] font-semibold">Lin Hong</span>, a Computer
+            Hey! I&apos;m <span className="text-[#72C6B2] font-semibold">Lin Hong</span>, a Computer
             Science student at the University of Waterloo and a passionate software engineer. I love
             building thoughtful full-stack products and have led impactful teams to ship everything
             from developer tooling to AI-powered applications.
           </Typography>
           <Typography className="text-[#DCDEFF]/90 leading-relaxed">
-            I've been to over 20 hackathons, won 10+ robotics awards, and organized over 6 hackathons 
-            to give back to the community. I'm also the founder of Linovation Design, where I
+            I&apos;ve been to over 20 hackathons, won 10+ robotics awards, and organized over 6 hackathons 
+            to give back to the community. I&apos;m also the founder of Linovation Design, where I
             built websites and ERP systems that helped local businesses improve operations.
           </Typography>
           <Typography className="text-[#DCDEFF]/90 leading-relaxed">
             Beyond code, I love storytelling, robotics, and anything that pushes me outside my
-            comfort zone. Whether I'm debugging JavaScript, pitching a startup, or mentoring
+            comfort zone. Whether I&apos;m debugging JavaScript, pitching a startup, or mentoring
             students, I bring energy, empathy, and execution.
           </Typography>
         </motion.div>

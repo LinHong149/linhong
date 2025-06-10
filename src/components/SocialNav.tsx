@@ -2,12 +2,9 @@
 
 import {
   EnvelopeIcon,
-  PlayCircleIcon,
 } from '@heroicons/react/24/outline';
 import {
   FiGithub,
-  FiInstagram,
-  FiTwitter,
   FiLinkedin,
 } from 'react-icons/fi';
 

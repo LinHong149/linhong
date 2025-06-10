@@ -39,6 +39,22 @@ const animationVariants = [
   },
 ];
 
+interface Skill {
+  name: string;
+  icon: string;
+}
+
+interface AnimatedCategoryProps {
+  category: string;
+  items: Skill[];
+  variant: {
+    hidden: { opacity: number; x: number };
+    visible: { opacity: number; x: number; transition: { duration: number; amount: number; ease: string } };
+  };
+  scrollY: number;
+  lastY: number;
+}
+
 export default function SkillsSection() {
   const [scrollY, setScrollY] = useState(0);
   const [lastY, setLastY] = useState(0);
@@ -73,7 +89,6 @@ export default function SkillsSection() {
             key={category}
             category={category}
             items={items}
-            index={index}
             variant={animationVariants[index % animationVariants.length]}
             scrollY={scrollY}
             lastY={lastY}
@@ -84,7 +99,7 @@ export default function SkillsSection() {
   );
 }
 
-function AnimatedCategory({ category, items, variant, index, scrollY, lastY }: any) {
+function AnimatedCategory({ category, items, variant, scrollY, lastY }: AnimatedCategoryProps) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { amount: 0.5 });
   const controls = useAnimation();
@@ -98,7 +113,7 @@ function AnimatedCategory({ category, items, variant, index, scrollY, lastY }: a
     } else if (!inView && scrollY < refTop) {
       controls.start('hidden');
     }
-  }, [inView, scrollY, lastY]);
+  }, [inView, scrollY, lastY, controls]);
 
   return (
     <motion.div
@@ -109,7 +124,7 @@ function AnimatedCategory({ category, items, variant, index, scrollY, lastY }: a
     >
       <h3 className="text-[#DCDEFF]/70 text-xl font-semibold mb-6">{category}</h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-        {items.map((skill: any) => (
+        {items.map((skill: Skill) => (
           <div key={skill.name} className="flex items-center gap-3">
             <div className="w-8 h-8 relative">
               <Image

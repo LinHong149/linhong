@@ -1,10 +1,9 @@
 'use client';
 
-import { useTheme } from '@mui/material/styles';
 import Image from 'next/image';
 import { Box, Typography } from '@mui/material';
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
-import { motion, useAnimation, useInView } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 
 const projects = [
@@ -38,7 +37,6 @@ const projects = [
 ];
 
 export default function Projects({ id }: { id?: string }) {
-    const theme = useTheme();
 
     return (
         <section id={id} className="w-full px-4 sm:px-6 lg:px-8 text-[#DCDEFF] h-min">
@@ -50,7 +48,7 @@ export default function Projects({ id }: { id?: string }) {
                 viewport={{ once: false, amount: 1.0 }}
                 className="max-w-4xl mx-auto mb-12 sm:mb-16 md:mb-20 flex flex-col sm:flex-row items-center gap-4 text-2xl sm:text-3xl md:text-4xl font-extrabold text-left leading-tight"
             >
-                Things I've Worked on,
+                Things I&apos;ve Worked on,
                 <span className="text-[#72C6B2]">Some of Them</span>
                 <span className="flex-1 h-px bg-[#DCDEFF]/20"></span>
             </motion.h2>
@@ -66,7 +64,6 @@ export default function Projects({ id }: { id?: string }) {
 
     function AnimatedProject({ proj, isEven }: { proj: typeof projects[0]; isEven: boolean }) {
         const ref = useRef<HTMLDivElement>(null);
-        const inView = useInView(ref, { amount: 1.0 });
         const controls = useAnimation();
 
         const [scrollY, setScrollY] = useState(0);
@@ -91,7 +88,7 @@ export default function Projects({ id }: { id?: string }) {
             } else {
                 controls.start('hidden');
             }
-        }, [scrollY, lastY]);
+        }, [scrollY, lastY, controls]);
 
         return (
             <motion.div
