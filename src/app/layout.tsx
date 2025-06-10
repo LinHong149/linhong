@@ -11,11 +11,21 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Lin Hong",
+  title: 'Lin Hong',
   icons: {
-    icon: '/favicon.svg',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [
+      { url: '/favicon.svg', type: 'image/svg+xml' }
+    ],
     shortcut: '/favicon.svg',
-    apple: '/favicon.svg',
+  },
+  other: {
+    'mask-icon': '/safari-pinned-tab.svg',
+    'theme-color': '#0A1110',
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'black-translucent',
   },
 };
 
@@ -26,9 +36,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} font-sans antialiased min-h-screen bg-[#0A1110]`}>
-        <meta name="theme-color" content="#0A1110" />
+      <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0A1110" />
+        <meta name="theme-color" content="#0A1110" />
+      </head>
+      <body className={`${poppins.variable} font-sans antialiased min-h-screen bg-[#0A1110]`}>
         <ThemeRegistry>{children}</ThemeRegistry>
       </body>
     </html>
