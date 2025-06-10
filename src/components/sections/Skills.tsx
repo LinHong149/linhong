@@ -5,23 +5,32 @@ import { motion, useAnimation, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 
 const skills = {
-  Frontend: [
-    { name: 'JavaScript', icon: '/skills/icons8-javascript.svg' },
-    { name: 'Tailwind CSS', icon: '/skills/icons8-tailwind-css.svg' },
-    { name: 'CSS', icon: '/skills/icons8-css-logo.svg' },
-    { name: 'React Native', icon: '/skills/icons8-react-native.svg' },
-    { name: 'C++', icon: '/skills/icons8-c++.svg' },
-  ],
-  Backend: [
-    { name: 'Node.js', icon: '/skills/icons8-nodejs.svg' },
-    { name: 'Next.js', icon: '/skills/icons8-next.js.svg' },
+  "Languages": [
     { name: 'Python', icon: '/skills/icons8-python.svg' },
+    { name: 'JavaScript', icon: '/skills/icons8-javascript.svg' },
+    { name: 'C++', icon: '/skills/icons8-c++.svg' },
+    { name: 'CSS', icon: '/skills/icons8-css-logo.svg' },
   ],
-  Tools: [
-    { name: 'Git', icon: '/skills/icons8-git.svg' },
-    { name: 'GitHub', icon: '/skills/icons8-github.svg' },
-    { name: 'Docker', icon: '/skills/icons8-docker.svg' },
+  "Web Dev": [
+    { name: 'React', icon: '/skills/icons8-react-native.svg' },
+    { name: 'Next.js', icon: '/skills/icons8-next.js.svg' },
+    { name: 'Flask', icon: '/skills/icons8-flask.svg' },
+    { name: 'MongoDB', icon: '/skills/mongodb.svg' },
+    { name: 'OpenAI API', icon: '/skills/icons8-chatgpt.svg' },
+    { name: 'Tailwind CSS', icon: '/skills/icons8-tailwind-css.svg' },
+    { name: 'Material UI', icon: '/skills/icons8-material-ui.svg' },
+  ],
+  "Cloud": [
     { name: 'Google Cloud', icon: '/skills/icons8-google-cloud.svg' },
+    { name: 'Cloudflare', icon: '/skills/cloudflare.svg' },
+    { name: 'Docker', icon: '/skills/icons8-docker.svg' },
+    { name: 'Nginx', icon: '/skills/icons8-nginx.svg' },
+    { name: 'PM2', icon: '/skills/pm2.svg' },
+  ],
+  "DevTools": [
+    { name: 'GitHub', icon: '/skills/icons8-github.svg' },
+    { name: 'Git', icon: '/skills/icons8-git.svg' },
+    { name: 'Postman', icon: '/skills/postman.svg' },
   ],
 };
 const animationVariants = [
