@@ -12,6 +12,11 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Lin Hong",
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({
@@ -23,6 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.variable} font-sans antialiased min-h-screen bg-[#0A1110]`}>
         <meta name="theme-color" content="#0A1110" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <ThemeRegistry>{children}</ThemeRegistry>
       </body>
     </html>

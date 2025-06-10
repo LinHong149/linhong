@@ -144,7 +144,7 @@ export default function Experiences() {
             <Box className="flex flex-col gap-2 flex-grow">
               {companies[selected].description.map((point, index) => (
                 <Box key={index} display="flex" alignItems="flex-start" gap={1}>
-                  <Typography variant="body2" className="text-[#DCDEFF]/90 text-sm sm:text-base leading-relaxed">
+                  <Typography variant="body1" className="text-[#DCDEFF]/90 text-sm sm:text-base leading-relaxed">
                     • {point}
                   </Typography>
                 </Box>
