@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## [linhong.dev](linhong.dev)
 
-## Getting Started
+### Overview
 
-First, run the development server:
+This is my personal portfolio website showcasing my projects, skills, experiences, and ways to get in touch. Built with Next.js and hosted on a homelab server using Docker and Nginx.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Technology Used
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Web Dev**
+- Next.js, Tailwind, Material UI
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Hosting**
+- Cloudflare, Nginx, PM2, Docker
+- Architecture:  
+  `Client → Cloudflare → Docker [Nginx → PM2]`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+### Updating Website
+1. Make changes and `git push`.
+2. On the homelab server, run:
+    ```bash
+    git pull
+    npm install
+    npm run lint
+    npm run build
+    pm2 restart <pm2 container name>
+    ```
+3. Check that the site is live at [linhong.dev](https://linhong.dev).
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Hosting Process
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### Setting up Docker with Nginx and PM2
 
-## Deploy on Vercel
+- **Docker**: Containerizes Nginx
+- **Nginx**: Acts as a load balancer and reverse proxy
+- **PM2**: Keeps the Node.js app running in the background
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Steps:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. SSH into the homelab server.
+2. Dockerize Nginx and create a `linhong.conf` config file under `/Documents/networking/sites-enabled/`.
+3. In `linhong.conf`, configure it to:
+   - Listen on ports 80 and 443
+   - Use `proxy_pass http://localhost:3001;` in the root location block
+
+---
+
+#### Running the Website
+
+1. In the homelab `~/Desktop` directory, run:
+    ```bash
+    git pull <repo-url>
+    npm install
+    npm run build
+    ```
+
+2. Start the server with PM2:
+    ```bash
+    npm install -g pm2
+    PORT=3001 pm2 start npm --name linhong -- start
+    pm2 save
+    ```
+
+3. Set up DNS on Cloudflare by pointing the domain to the homelab’s public IP address.
+
+4. Generate an SSL certificate:
+    ```bash
+    sudo apt install certbot
+    sudo certbot certonly --standalone -d linhong.dev -d www.linhong.dev
+    ```
+
+5. Start the Docker container:
+    ```bash
+    docker start <nginx-container-name>
+    docker ps  # to confirm it's running
+    docker compose up -d
+    ```
