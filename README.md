@@ -48,7 +48,7 @@ Steps:
 
 ---
 
-#### Running the Website
+### Running the Website
 
 1. In the homelab `~/Desktop` directory, run:
     ```bash
